@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewSafemoon - Meme Token</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --accent-color: #ffff00;
+            --text-color: #ffffff;
+            --background-color: #000033;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 51, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            opacity: 0.1;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 72px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 24px;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--secondary-color);
+        }
+
+        .section-separator {
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            margin: 80px 0;
+        }
+
+        .about, .tokenomics, .how-to-buy, .roadmap {
+            padding: 80px 0;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            margin-bottom: 40px;
+            text-align: center;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .about-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 0 30px var(--primary-color);
+        }
+
+        .tokenomics-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .tokenomics-list li {
+            font-size: 18px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tokenomics-list li::before {
+            content: '🚀';
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .how-to-buy-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .step {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .step-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .roadmap-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .roadmap-item {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .roadmap-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .roadmap-item:nth-child(odd)::after {
+            right: -50px;
+        }
+
+        .roadmap-item:nth-child(even)::after {
+            left: -50px;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 51, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .token-address {
+            margin-top: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+        }
+
+        .copy-icon {
+            cursor: pointer;
+            margin-left: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .copy-icon:hover {
+            color: var(--primary-color);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spinning {
+            animation: spin 10s linear infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .pulsing {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">NewSafemoon</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#tokenomics">Tokenomics</a>
+                <a href="#how-to-buy">How to Buy</a>
+                <a href="#roadmap">Roadmap</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1 class="floating">NewSafemoon</h1>
+            <p class="pulsing">Get ready for liftoff with the most hilarious meme token in the crypto galaxy! 🚀🌜</p>
+            <button class="cta-button">Join the Crew</button>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="about" class="about container">
+            <h2>About NewSafemoon</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>NewSafemoon takes inspiration from the legendary Safemoon but with a fresh, hilarious twist. As we ride the wave of the latest celebrity-themed crypto trend, NewSafemoon combines the thrill of lunar missions with the laughter of celebrity memes, engaging the community in a cosmic comedy show.</p>
+                    <p>Join the NewSafemoon crew and let's humorously explore the crypto galaxy together!</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://placekitten.com/500/500" alt="NewSafemoon Concept" class="spinning">
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="tokenomics" class="tokenomics container">
+            <h2>TOKENOMICS</h2>
+            <ul class="tokenomics-list">
+                <li>Total Supply: 1,000,000,000,000 NSM</li>
+                <li>5% Redistribution to Holders</li>
+                <li>3% Liquidity Pool</li>
+                <li>2% Burn on Every Transaction</li>
+            </ul>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="how-to-buy" class="how-to-buy container">
+            <h2>HOW TO BUY</h2>
+            <div class="how-to-buy-steps">
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-wallet"></i></div>
+                    <h3>Get a Wallet</h3>
+                    <p>Download a reputable Ethereum wallet like MetaMask or Trust Wallet.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fab fa-ethereum"></i></div>
+                    <h3>Acquire ETH</h3>
+                    <p>Purchase Ethereum (ETH) from a cryptocurrency exchange like Coinbase or Binance.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h3>Connect to a DEX</h3>
+                    <p>Connect your wallet to a decentralized exchange (DEX) like Uniswap or SushiSwap.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Swap ETH for NSM</h3>
+                    <p>Use the DEX's swap feature to exchange your ETH for NewSafemoon (NSM).</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <section id="roadmap" class="roadmap container">
+            <h2>ROADMAP</h2>
+            <div class="roadmap-timeline">
+                <div class="roadmap-item">
+                    <h3>Phase 1: Liftoff & Community Building</h3>
+                    <p>We'll launch NewSafemoon and focus on growing a strong, humor-loving community.</p>
+                </div>
+                <div class="roadmap-item">
+                    <h3>Phase 2: Meme Marketing & Partnerships</h3>
+                    <p>We'll ramp up our meme game, create viral content, and form strategic partnerships with influencers and meme pages.</p>
+                </div>
+                <div class="roadmap-item">
+                    <h3>Phase 3: Lunar Laughter Development</h3>
+                    <p>We'll develop new features and utilities for the token, including a meme creation platform and NFT marketplace.</p>
+                </div>
+                <div class="roadmap-item">
+                    <h3>Phase 4: Intergalactic Expansion</h3>
+                    <p>We'll explore new opportunities, expand the token's reach, and potentially launch our own blockchain-based comedy network.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="token-address">
+                <span>Contract Address: 0x1234...5678</span>
+                <i class="fas fa-copy copy-icon"></i>
+            </div>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fas fa-chart-line"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a href="#" target="_blank"><i class="fas fa-search-dollar"></i></a>
+            </
